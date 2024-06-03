@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - '8000:8000'
+    volumes:
+      - .:/hakaton
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: 'hakaton_backend_db'
+      POSTGRES_USER: 'hakatonuser'
+      POSTGRES_PASSWORD: 'hakatonBackend2023'
+    ports:
+      - '5430:5432'
+  #    volumes:
+  #      - postgres_data:/var/lib/postgresql/data:rw
+
+  redis:
+    image: redis:latest
+
+#volumes:
+#  postgres_data: { }
